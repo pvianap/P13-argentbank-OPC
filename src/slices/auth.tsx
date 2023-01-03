@@ -3,9 +3,9 @@ import { setMessage } from './message';
 
 import AuthService from '../services/auth-service';
 
-const userData = localStorage.getItem('user') ?? '{}';
-const user = JSON.parse(userData);
-
+const user = JSON.parse(localStorage.getItem('user') || 'null');
+console.log('Auth user variable: ', user);
+console.log('Auth user typeof: ', typeof user);
 export const register = createAsyncThunk(
   'auth/register',
   async (

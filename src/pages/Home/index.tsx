@@ -5,9 +5,16 @@ import MoneyIcon from '../../assets/icon-money.png';
 import SecurityIcon from '../../assets/icon-security.png';
 import Background from '../../assets/bank-tree.jpeg';
 
+import { useSelector } from 'react-redux';
+
 type Props = {};
 
 export default function Home({}: Props) {
+  console.log(
+    'State',
+    useSelector((state: any) => state)
+  );
+  console.log('Local ', localStorage.getItem('user'));
   return (
     <div>
       <div className="hero" style={{ backgroundImage: `url(${Background})` }}>
