@@ -1,44 +1,14 @@
 import axios from 'axios';
+import authHeader from './auth-header';
 
 const API_URL = 'http://localhost:3001/api/v1';
 
-const register = (
-  email: string,
-  password: string,
-  firstName: string,
-  lastName: string
-) => {
-  return axios.post(API_URL + '/user/signup', {
-    email,
-    password,
-    firstName,
-    lastName,
-  });
+const getUserBoard = () => {
+  return axios.get(API_URL + 'user', { headers: authHeader() });
 };
 
-const login = (email: string, password: string) => {
-  return axios
-    .post(API_URL + 'signin', {
-      email,
-      password,
-    })
-    .then((response) => {
-      if (response.data.accessToken) {
-        localStorage.setItem('user', JSON.stringify(response.data));
-      }
-
-      return response.data;
-    });
+const userService = {
+  getUserBoard,
 };
 
-const logout = () => {
-  localStorage.removeItem('user');
-};
-
-const authService = {
-  register,
-  login,
-  logout,
-};
-
-export default authService;
+export default userService;
