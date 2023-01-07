@@ -1,71 +1,28 @@
 // import React, { useState } from 'react';
 // import Api from '../../utils/Api';
+import { faHandPointLeft } from '@fortawesome/free-solid-svg-icons';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { login } from '../../slices/auth';
-import { clearMessage } from '../../slices/message';
+// import { clearMessage } from '../../slices/message';
+import { login, logout } from '../../store/User';
 
 type Props = {};
 
 export default function Login({}: Props) {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [error, setError] = useState('');
-
-  // const handleSubmit = async (event: React.FormEvent) => {
-  //   event.preventDefault();
-  //   try {
-  //     await Api.login(email, password).then((res) =>
-  //       console.log(res.body.token)
-  //     );
-  //     // gérez ici la réussite du login
-  //   } catch (error: any) {
-  //     setError(error.message);
-  //     console.log('Login error: ', error);
-  //   }
-  // };
-
-  let navigate = useNavigate();
-
-  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-
-  const { isLoggedIn } = useSelector((state: any) => state.auth);
-  const { message } = useSelector((state: any) => state.message);
-
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(clearMessage());
-  }, [dispatch]);
-
-  const initialValues = {
-    email: '',
-    password: '',
-  };
-
-  const handleSubmit = (event: React.FormEvent) => {
+  const { user } = useSelector((state: any) => state.user);
+  console.log('User from login page: ', user);
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setLoading(true);
-
-    dispatch(login({ email, password }))
-      .unwrap()
-      .then(() => {
-        navigate('/profile');
-        window.location.reload();
-      })
-      .catch(() => {
-        setLoading(false);
-      });
+    console.log('Form: ', email, ' ', password);
+    dispatch(login({ email, password }));
   };
-
-  if (isLoggedIn) {
+  if (user) {
     return <Navigate to="/profile" />;
   }
-
   return (
     <div>
       <section className="sign-in-content">
@@ -98,9 +55,9 @@ export default function Login({}: Props) {
           {/* SHOULD BE THE BUTTON BELOW  */}
           <button className="sign-in-button">Sign In</button>
         </form>
-        {loading && (
+        {/* {loading && (
           <span className="spinner-border spinner-border-sm">Loading</span>
-        )}
+        )} */}
       </section>
     </div>
   );

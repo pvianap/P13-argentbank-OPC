@@ -7,8 +7,6 @@ import Footer from './components/Footer';
 import Router from './utils/Router';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="app">
       <Header />

@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import Account from '../../components/Account';
+import { profile } from '../../store/User';
 
-type Props = {};
+export default function Profile() {
+  const [content, setContent] = useState<{
+    firstName: string;
+    lastName: string;
+  }>({ firstName: '', lastName: '' });
 
-export default function Profile({}: Props) {
+  useEffect(() => {
+    profile().then((res: any) => setContent(res.data.body));
+  }, []);
+
   return (
     <div>
       <main className="main bg-dark">
@@ -10,41 +19,26 @@ export default function Profile({}: Props) {
           <h1>
             Welcome back
             <br />
-            Tony Jarvis!
+            {content.firstName} {content.lastName}!
           </h1>
           <button className="edit-button">Edit Name</button>
         </div>
         <h2 className="sr-only">Accounts</h2>
-        <section className="account">
-          <div className="account-content-wrapper">
-            <h3 className="account-title">Argent Bank Checking (x8349)</h3>
-            <p className="account-amount">$2,082.79</p>
-            <p className="account-amount-description">Available Balance</p>
-          </div>
-          <div className="account-content-wrapper cta">
-            <button className="transaction-button">View transactions</button>
-          </div>
-        </section>
-        <section className="account">
-          <div className="account-content-wrapper">
-            <h3 className="account-title">Argent Bank Savings (x6712)</h3>
-            <p className="account-amount">$10,928.42</p>
-            <p className="account-amount-description">Available Balance</p>
-          </div>
-          <div className="account-content-wrapper cta">
-            <button className="transaction-button">View transactions</button>
-          </div>
-        </section>
-        <section className="account">
-          <div className="account-content-wrapper">
-            <h3 className="account-title">Argent Bank Credit Card (x8349)</h3>
-            <p className="account-amount">$184.30</p>
-            <p className="account-amount-description">Current Balance</p>
-          </div>
-          <div className="account-content-wrapper cta">
-            <button className="transaction-button">View transactions</button>
-          </div>
-        </section>
+        <Account
+          title="Argent Bank Checking (x8349)"
+          amountString="2082.79"
+          description="Available Balance"
+        />
+        <Account
+          title="Argent Bank Savings (x6712)"
+          amountString="10928.42"
+          description="Available Balance"
+        />
+        <Account
+          title="Argent Bank Credit Card (x8349)"
+          amountString="184.30"
+          description="Current Balance"
+        />
       </main>
     </div>
   );

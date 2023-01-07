@@ -5,8 +5,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import './index.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
