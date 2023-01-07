@@ -289,3 +289,41 @@ body {
     width: 200px;
   }
 }
+
+.formChangeUserNameInputs {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.formChangeUserNameButtons {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.inputUpdate {
+  width: 180px;
+  height: 35px;
+  border: 2px solid lightgrey;
+  border-radius: 3px;
+  text-indent: 10px;
+  margin: 7px;
+  margin-bottom: 5px;
+}
+
+.inputUpdate::placeholder {
+  color: #afbac3;
+}
+
+.buttonUpdate {
+  width: 120px;
+  height: 30px;
+  margin: 7px;
+  color: #6456f5;
+  border: 2px solid #c3c3f3;
+  border-radius: 3px;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 0;
+}

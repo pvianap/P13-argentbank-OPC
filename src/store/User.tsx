@@ -50,9 +50,17 @@ export const logout = () => async (dispatch: any) => {
 export const profile = async () => {
   try {
     const res = await api.post('/user/profile', {}, { headers: authHeader() });
-
-    console.log('New action test: ', res);
     return res;
+  } catch (e: any) {
+    return console.error(e.message);
+  }
+};
+
+export const updateProfile = async (userProfile: object) => {
+  try {
+    const res = await api.put('/user/profile', userProfile, {
+      headers: authHeader(),
+    });
   } catch (e: any) {
     return console.error(e.message);
   }
