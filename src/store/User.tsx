@@ -18,13 +18,21 @@ const slice = createSlice({
       state.user = null;
       localStorage.removeItem('user');
     },
+    setProfile: (state, action) => {
+      //ADD TO STATE
+      state.user.content = action.payload;
+      //ADD TO LOCAL STORAGE
+      const user = JSON.parse(localStorage.getItem('user') ?? 'null');
+      user.content = action.payload;
+      localStorage.setItem('user', JSON.stringify(user));
+    },
   },
 });
 
 export default slice.reducer;
 
 // Actions
-const { loginSuccess, logoutSuccess } = slice.actions;
+const { loginSuccess, logoutSuccess, setProfile } = slice.actions;
 export const login =
   ({ email, password }: { email: string; password: string }) =>
   async (dispatch: any) => {
@@ -32,8 +40,8 @@ export const login =
     try {
       const res = await api.post('/user/login', { email, password });
 
-      console.log(res);
       dispatch(loginSuccess({ token: res.data.body.token }));
+      dispatch(profile());
     } catch (e: any) {
       return console.error(e.message);
     }
@@ -47,10 +55,11 @@ export const logout = () => async (dispatch: any) => {
   }
 };
 
-export const profile = async () => {
+export const profile = () => async (dispatch: any) => {
   try {
     const res = await api.post('/user/profile', {}, { headers: authHeader() });
-    return res;
+    dispatch(setProfile({ content: res.data.body }));
+    return res.data.body;
   } catch (e: any) {
     return console.error(e.message);
   }

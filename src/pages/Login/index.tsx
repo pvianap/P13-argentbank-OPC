@@ -14,10 +14,9 @@ export default function Login({}: Props) {
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.user);
-  console.log('User from login page: ', user);
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log('Form: ', email, ' ', password);
     dispatch(login({ email, password }));
   };
   if (user) {

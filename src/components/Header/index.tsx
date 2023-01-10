@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { Link, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../store/User';
+import { logout, profile } from '../../store/User';
 
 type Props = {};
 
@@ -15,7 +15,14 @@ export default function Header({}) {
   function LogOut() {
     dispatch(logout());
   }
+  // GET CONTENT
+  const [isLoading, setIsLoading] = useState(true);
+  const [content, setContent] = useState<{
+    firstName: string;
+    lastName: string;
+  }>({ firstName: '', lastName: '' });
 
+  console.log('User header: ', user);
   return (
     <nav className="main-nav">
       <Link className="main-nav-logo" to="/">
@@ -31,7 +38,12 @@ export default function Header({}) {
           <div>
             <Link to="/profile">
               <i className="fa-solid fa-2x fa-circle-user" />
-              <p> Le nom </p>
+              <p>
+                {' '}
+                {user.content != undefined
+                  ? user.content.content.firstName
+                  : ''}{' '}
+              </p>
             </Link>
             <Link
               className="main-nav-item"
