@@ -30,7 +30,8 @@ export default function Profile() {
       firstName: e.target[0].value,
       lastName: e.target[1].value,
     };
-    updateProfile(userProfile).then(() => dispatch(profile()));
+    dispatch(updateProfile(userProfile));
+    // .then(() => dispatch(profile()));
     setIsUpdating(false);
   };
   // console.log('Profile content: ', content);

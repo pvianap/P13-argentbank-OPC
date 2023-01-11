@@ -65,11 +65,12 @@ export const profile = () => async (dispatch: any) => {
   }
 };
 
-export const updateProfile = async (userProfile: object) => {
+export const updateProfile = (userProfile: object) => async (dispatch: any) => {
   try {
     const res = await api.put('/user/profile', userProfile, {
       headers: authHeader(),
     });
+    dispatch(profile());
   } catch (e: any) {
     return console.error(e.message);
   }
