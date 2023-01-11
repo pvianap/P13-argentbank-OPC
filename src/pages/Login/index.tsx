@@ -24,40 +24,42 @@ export default function Login({}: Props) {
   }
   return (
     <div>
-      <section className="sign-in-content">
-        <i className="fa fa-user-circle sign-in-icon"></i>
-        <h1>Sign In</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="input-wrapper">
-            <label htmlFor="username">Username</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              id="email"
-            />
-          </div>
-          <div className="input-wrapper">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              id="password"
-            />
-          </div>
-          <div className="input-remember">
-            <input type="checkbox" id="remember-me" />
-            <label htmlFor="remember-me">Remember me</label>
-          </div>
+      <main className="main bg-dark">
+        <section className="sign-in-content">
+          <i className="fa fa-user-circle sign-in-icon"></i>
+          <h1>Sign In</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="input-wrapper">
+              <label htmlFor="username">Username</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                id="email"
+              />
+            </div>
+            <div className="input-wrapper">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                id="password"
+              />
+            </div>
+            <div className="input-remember">
+              <input type="checkbox" id="remember-me" />
+              <label htmlFor="remember-me">Remember me</label>
+            </div>
 
-          {/* SHOULD BE THE BUTTON BELOW  */}
-          <button className="sign-in-button">Sign In</button>
-        </form>
-        {/* {loading && (
+            {/* SHOULD BE THE BUTTON BELOW  */}
+            <button className="sign-in-button">Sign In</button>
+          </form>
+          {/* {loading && (
           <span className="spinner-border spinner-border-sm">Loading</span>
         )} */}
-      </section>
+        </section>
+      </main>
     </div>
   );
 }

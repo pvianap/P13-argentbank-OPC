@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import '../../style/main.css';
 import Logo from '../../assets/argentBankLogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faUserCircle, faSignOut } from '@fortawesome/free-solid-svg-icons';
 import { Link, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, profile } from '../../store/User';
@@ -37,24 +37,19 @@ export default function Header({}) {
         {user ? (
           <div>
             <Link to="/profile">
-              <i className="fa-solid fa-2x fa-circle-user" />
-              <p>
-                {' '}
-                {user.content != undefined
-                  ? user.content.content.firstName
-                  : ''}{' '}
-              </p>
+              <FontAwesomeIcon
+                icon={faUserCircle}
+                className="fa fa-user-circle"
+              />
+              {user.content != undefined ? user.content.content.firstName : ''}{' '}
             </Link>
             <Link
               className="main-nav-item"
               onClick={() => LogOut()}
               to="/login"
             >
-              <FontAwesomeIcon
-                icon={faUserCircle}
-                className="fa fa-user-circle"
-              />
-              Logout
+              <FontAwesomeIcon icon={faSignOut} className="fa fa-sign-out" />
+              Sign Out
             </Link>
           </div>
         ) : (
